@@ -2,16 +2,18 @@ import { Component } from '@angular/core';
 import { Employee } from './employees/employee';
 import { EmployeeService } from './employees/employeeService';
 import { PrimeEmployee } from './employees/PrimeEmployee';
+import { CarService } from "./Car/CarService";
+import { Car } from "./Car/Car";
 
 @Component({
   selector : 'app-root',
   templateUrl : './app.component.html',
   styleUrls : [ './app.component.css' ],
-  providers : [ EmployeeService ]
+  providers : [ CarService ]
 })
 export class AppComponent {
 
-  displayDialog : boolean;
+/*  displayDialog : boolean;
 
   employee : Employee = new PrimeEmployee();
 
@@ -19,12 +21,35 @@ export class AppComponent {
 
   newEmployee : boolean;
 
-  employees : Employee[];
+  employees : Employee[];*/
 
-  constructor (private employeeService : EmployeeService) {
+  loading: boolean;
+
+  cars: Car[];
+
+  cols: any[];
+  constructor(private carService: CarService) { }
+
+  ngOnInit() {
+    this.loading = true;
+    setTimeout(() => {
+      // this.carService.getCarsMedium().then(cars => this.cars = cars);
+      this.cars =this.carService.getCarsMedium().data;//.then(cars => = cars);
+      this.loading = false;
+    }, 1000);
+
+    this.cols = [
+      {field: 'vin', header: 'Vin'},
+      {field: 'year', header: 'Year'},
+      {field: 'brand', header: 'Brand'},
+      {field: 'color', header: 'Color'}
+    ];
   }
 
-  ngOnInit () {
+ /* constructor (private employeeService : EmployeeService) {
+  }*/
+
+  /*ngOnInit () {
     // this.employeeService.getCarsMedium().then(employees => this.employees = employees);
     const  employees = this.employeeService.getCarsMedium();
     this.employees = employees;
@@ -70,5 +95,5 @@ export class AppComponent {
 
   findSelectedCarIndex () : number {
     return this.employees.indexOf(this.selectedEmployee);
-  }
+  }*/
 }
