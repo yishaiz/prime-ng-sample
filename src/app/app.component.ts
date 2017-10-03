@@ -34,7 +34,12 @@ export class AppComponent {
     this.loading = true;
     setTimeout(() => {
       // this.carService.getCarsMedium().then(cars => this.cars = cars);
-      this.cars =this.carService.getCarsMedium().data;//.then(cars => = cars);
+
+      this.carService.getCarsMedium().then(cars => this.cars = cars() );
+      // this.carService.getCarsMedium().then(cars => {debugger});
+
+
+      // this.cars =this.carService.getCarsMedium().data;//.then(cars => = cars);
       this.loading = false;
     }, 1000);
 
