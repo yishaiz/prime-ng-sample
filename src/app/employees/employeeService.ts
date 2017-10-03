@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Employee } from '../../app/employees/employee';
-import { promise } from "selenium-webdriver";
+// import { promise } from "selenium-webdriver";
 import { PrimeEmployee } from "./PrimeEmployee";
 
 @Injectable()
